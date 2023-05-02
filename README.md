@@ -12,6 +12,7 @@ change the game size with a slider on screen
 
 Images For non commercial only
 Commented some code using ChatGPT
+The apk is in the directory too
 
 
 the tracker image is in the same directory too
