@@ -17,7 +17,7 @@ The apk is in the directory too
 
 the tracker image is in the same directory too
 
-Visit - https://anshurw.wixsite.com/abrport for more details and drive link for video
+Visit - https://anshurw.wixsite.com/abrport for more details and drive link for videos
 
 twitter-@AbhiRwDev
 
