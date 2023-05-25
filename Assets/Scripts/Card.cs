@@ -18,6 +18,7 @@ public class Card : MonoBehaviour
     public int Chances;
     public int Matches,AllMatches;
     public TextMeshProUGUI Counters;
+    public ImageAssigner imgassigner;
     private void Awake()
     {
         raycaster = GetComponent<GraphicRaycaster>();
@@ -26,61 +27,65 @@ public class Card : MonoBehaviour
 
     private void Update()
     {
-        Counters.text = "Moves Left-" + Chances + "|    | Matches- " + Matches + "/" + AllMatches;
-        if(Chances==0&&Matches<FindObjectOfType<ImageAssigner>().ccs.Length/2)
+        
+        Counters.text = "Remaining-" + Chances + "               Correct- " + Matches + "/" + AllMatches;
+        if (imgassigner.HasFlippedAll)
         {
-            LoseMenu.SetActive(true);
-            Debug.Log("Lose");
-        }
-
-        if(Matches== AllMatches)
-        {
-            Winmenu.SetActive(true);
-            Debug.Log("win");
-        }
-        // Check if there is a touch on the screen
-        if (canselectagain)
-        {
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            if (Chances == 0 && Matches < FindObjectOfType<ImageAssigner>().ccs.Length / 2)
             {
-                // Set up the new Pointer Event
-                pointerEventData = new PointerEventData(eventSystem);
-                pointerEventData.position = Input.GetTouch(0).position;
+                LoseMenu.SetActive(true);
+                Debug.Log("Lose");
+            }
 
-                // Raycast using the Graphics Raycaster and Pointer Event
-                List<RaycastResult> results = new List<RaycastResult>();
-                raycaster.Raycast(pointerEventData, results);
-
-                // Check if the raycast hits any objects
-                if (results.Count > 0)
+            if (Matches == AllMatches)
+            {
+                Winmenu.SetActive(true);
+                Debug.Log("win");
+            }
+            // Check if there is a touch on the screen
+            if (canselectagain)
+            {
+                if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
                 {
-                    if (selectedObject == null)
+                    // Set up the new Pointer Event
+                    pointerEventData = new PointerEventData(eventSystem);
+                    pointerEventData.position = Input.GetTouch(0).position;
+
+                    // Raycast using the Graphics Raycaster and Pointer Event
+                    List<RaycastResult> results = new List<RaycastResult>();
+                    raycaster.Raycast(pointerEventData, results);
+
+                    // Check if the raycast hits any objects
+                    if (results.Count > 0)
                     {
-                        
-                            selectedObject = results[0].gameObject;
-                        if (selectedObject.CompareTag("card"))
+                        if (selectedObject == null)
                         {
-                            selectedObject.GetComponent<CardImage>().SwitchTex();
+
+                            selectedObject = results[0].gameObject;
+                            if (selectedObject.CompareTag("card"))
+                            {
+                                selectedObject.GetComponent<CardImage>().SwitchTex();
+                            }
+                            else
+                            {
+                                selectedObject = null;
+                            }
+
+
                         }
                         else
                         {
-                            selectedObject = null;
-                        }
-                            
-                        
-                    }
-                    else
-                    {
-                        if (selectedObject != results[0].gameObject)
-                        {
-                            NewselectedObject = results[0].gameObject;
-                            NewselectedObject.GetComponent<CardImage>().SwitchTex();
-                            canselectagain = false;
+                            if (selectedObject != results[0].gameObject)
+                            {
+                                NewselectedObject = results[0].gameObject;
+                                NewselectedObject.GetComponent<CardImage>().SwitchTex();
+                                canselectagain = false;
 
+                            }
+                            StartCoroutine(Showresult());
                         }
-                        StartCoroutine(Showresult());
-                    }
 
+                    }
                 }
             }
         }

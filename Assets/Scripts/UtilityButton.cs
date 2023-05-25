@@ -41,4 +41,8 @@ public class UtilityButton : MonoBehaviour
         // Scale the game object with the tag "Phones" using the new vector
         GameObject.FindGameObjectWithTag("Phones").transform.localScale = size;
     }
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

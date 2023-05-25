@@ -4,48 +4,59 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ImageAssigner : MonoBehaviour
 {
-    public Sprite[] Sprites,AnimalSprites,VehicleSprites,FruitsSprite;
+    public Sprite[] Sprites,Level1,Level2,Level3,Level4;
     public List<Image> Cards;
     public GameObject[] ccs;
     public Vector2[] positions;
     public Vector2 zeropos;
     public int CardCount;
-    int cardindex = 0;
+    [SerializeField]int cardindex = 0;
     bool bSetpositions=false;
+    public bool HasFlippedAll=false;
     public enum ImageType
     {
-        Animals,
-        Vehicles,
-        Fruits
+        First,
+        Second,
+        Third,
+        Fourth
     }
+    public bool FlipFlag = false;
 
     public ImageType Level_ImageType;
     private void Awake()
     {
-        if(Level_ImageType==ImageType.Animals)
+        if(Level_ImageType==ImageType.First)
         {
-            Sprites = new Sprite[AnimalSprites.Length];
+            Sprites = new Sprite[Level1.Length];
 
             for (int i = 0; i < Sprites.Length; i++)
             {
-                Sprites[i] = AnimalSprites[i];
+                Sprites[i] = Level1[i];
             }
 
         }
-        else if(Level_ImageType == ImageType.Vehicles)
+        else if(Level_ImageType == ImageType.Second)
         {
-            Sprites = new Sprite[VehicleSprites.Length];
+            Sprites = new Sprite[Level2.Length];
             for (int i = 0; i < Sprites.Length; i++)
             {
-                Sprites[i] = VehicleSprites[i];
+                Sprites[i] = Level2[i];
+            }
+        }
+        else if(Level_ImageType==ImageType.Third)
+        {
+            Sprites = new Sprite[Level3.Length];
+            for (int i = 0; i < Sprites.Length; i++)
+            {
+                Sprites[i] = Level3[i];
             }
         }
         else
         {
-            Sprites = new Sprite[FruitsSprite.Length];
+            Sprites = new Sprite[Level4.Length];
             for (int i = 0; i < Sprites.Length; i++)
             {
-                Sprites[i] = FruitsSprite[i];
+                Sprites[i] = Level4[i];
             }
         }
 
@@ -102,12 +113,27 @@ public class ImageAssigner : MonoBehaviour
             }
             else
             {
-               
-                if (cardindex < ccs.Length-1)
+                ccs[cardindex].GetComponent<Image>().sprite = ccs[cardindex].GetComponent<CardImage>().FrontTex;
+                if (cardindex <= ccs.Length-1)
                     cardindex++;
             }
         }
+        if(cardindex==ccs.Length-1&&!FlipFlag)
+        {
+            Invoke(nameof(FlipBack),2f);
+            FlipFlag = true;
+        }
         
+    }
+    public void FlipBack()
+    {
+        
+        foreach (var item in ccs)
+        {
+            item.GetComponent<CardImage>().SwitchTex();
+           
+        }
+        HasFlippedAll = true;
     }
     public void SetPositions()
     {
