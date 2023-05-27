@@ -94,8 +94,8 @@ MonoBehaviour:
   NoMatch: {fileID: 21300000, guid: e49be0daf48b0d146b45c48f2e383b25, type: 3}
   ad: {fileID: 8434636041805595122}
   audios:
-  - {fileID: 8300000, guid: 0caa296705a3e6046a84adc173a23fa3, type: 3}
-  - {fileID: 8300000, guid: ee19d52c9f5d5ad4381627ebc92dc33e, type: 3}
+  - {fileID: 8300000, guid: c5222d8891e95f44f976fa178aed11b5, type: 3}
+  - {fileID: 8300000, guid: 8b67e1b649fe23f4ebafb25f731108eb, type: 3}
 --- !u!82 &8434636041805595122
 AudioSource:
   m_ObjectHideFlags: 0

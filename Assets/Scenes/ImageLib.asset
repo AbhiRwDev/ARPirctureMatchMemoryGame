@@ -21,9 +21,9 @@ MonoBehaviour:
       m_GuidLow: 5312293409061941533
       m_GuidHigh: 6553815629395325057
     m_SerializedTextureGuid:
-      m_GuidLow: 10575793959537462364
-      m_GuidHigh: 12250332532154700075
-    m_Size: {x: 0.1, y: 0.1}
+      m_GuidLow: 13385950179491284819
+      m_GuidHigh: 6846109549172673147
+    m_Size: {x: 0.1, y: 0.056250002}
     m_SpecifySize: 1
     m_Name: qB6sQ
-    m_Texture: {fileID: 2800000, guid: bff3cc5cc49292c42b117e6f88ec01aa, type: 3}
+    m_Texture: {fileID: 2800000, guid: 35a7875372c4b9c47bcad8db5c44025f, type: 3}
